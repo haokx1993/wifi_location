@@ -3,6 +3,7 @@
 # filename: wifiLocalization.py
 # function: scan APs and post RSSI & MAC of APs to Gaode API, return longitude & latitude
 # by: haokx
+# created date: 2018.1.16
 
 import serial
 import requests
@@ -12,32 +13,44 @@ import json
 import sys
 
 import str_bytes_conv
+import formatapinfo
 
 # ESP8266 COM25 baudrate: 115200 just in haokx's PC
 comNo = "COM25"
 baudrateCom = 115200
 
 # Http request url
+# amap key
+# my iPhone IMEI
 
+# Set up and open serial 
 wifiSerial = serial.Serial(comNo, baudrateCom, timeout = 3)
 print(wifiSerial.portstr)
 print(wifiSerial.isOpen())
 
-# # Get 8266 version information and print it, testing 8266
-# writeGmrFlag = wifiSerial.write('AT+GMR\r\n'.encode()) #AT+GMR: get version information
-# wifiInfo = wifiSerial.read(1000)
-# wifiInfo = str_bytes_conv.bytesToStr(wifiInfo)
-# print(wifiInfo)
-
 # Scan APs and return information of APs, including RSSI and MAC, etc.
 writeFlag = wifiSerial.write('AT+CWLAP\r\n'.encode()) #AT+CWLAP: scan AP
 apInfo = wifiSerial.read(3000) #return bytes type
+# print(apInfo)
 apInfo = str_bytes_conv.bytesToStr(apInfo) #bytes to str
 print(apInfo)
 
 # Extract RSSI, MAC & SSID, {27, 100}: ignore APs without SSID
-extractAp = re.findall(r'(["][0-9a-zA-Z].{27,100}")', apInfo, re.M)
-print(extractAp)
+apList = re.findall(r'(["][0-9a-zA-Z].{27,100}")', apInfo, re.M)
+apQuantity = len(apList)
+# print(apQuantity)
+# print(apList)
+if apQuantity > 30:
+ apList = apList[0:29]
+
+# List to str, remove "
+extractAp = '\r\n'.join(apList)
+
+# Format AP as MAC,RSSI,SSID|MAC,RSSI,SSID...
+apFormatted = formatapinfo.formatAp(extractAp, apQuantity)
+print(apFormatted)
 
 # Http request
+# headers = {amapUrl?'accesstype=1'&phoneImei&}
+
 wifiSerial.close()
