@@ -57,13 +57,7 @@ print(apFormatted)
 
 # Http request
 
-# headers = {
-	# 'accesstype': '1',
-	# 'imei': '352023073503050',
-	# 'macs': apFormatted,
-	# 'output': 'json',
-	# 'key': '0563c3cf06033e0dc6aa598c97e789e1'
-# }
+
 location = requests.get(headers)
 print(location)
 print(location.text)
