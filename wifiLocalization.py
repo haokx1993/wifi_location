@@ -13,6 +13,7 @@ import json
 import sys
 import urllib
 import urllib.request
+import time
 
 import str_bytes_conv
 import formatapinfo
@@ -30,6 +31,8 @@ wifiSerial = serial.Serial(comNo, baudrateCom, timeout = 3)
 print(wifiSerial.portstr)
 print(wifiSerial.isOpen())
 
+timeStamp = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
+print(timeStamp)
 # Scan APs and return information of APs, including RSSI and MAC, etc.
 writeFlag = wifiSerial.write('AT+CWLAP\r\n'.encode()) #AT+CWLAP: scan AP
 apInfo = wifiSerial.read(3000) #return bytes type
@@ -61,3 +64,10 @@ print(apFormatted)
 location = requests.get(headers)
 # print(location)
 print(location.text)
+
+with open('apinfo.txt', 'a') as f:
+	f.write(timeStamp)
+	f.write('\n')
+	f.write(apFormatted.replace('|', '\n'))
+	f.write('\n')
+	f.write(location.text)
