@@ -17,6 +17,8 @@ import str_bytes_conv
 comNo = "COM25"
 baudrateCom = 115200
 
+# Http request url
+
 wifiSerial = serial.Serial(comNo, baudrateCom, timeout = 3)
 print(wifiSerial.portstr)
 print(wifiSerial.isOpen())
