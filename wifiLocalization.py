@@ -43,9 +43,8 @@ print(apInfo)
 
 # Extract RSSI, MAC & SSID, {27, 100}: ignore APs without SSID
 apList = re.findall(r'(["][0-9a-zA-Z].{27,100}")', apInfo, re.M)
+# The quantity of AP scanned
 apQuantity = len(apList)
-# print(apQuantity)
-# print(apList)
 
 # Post 30 MACs most
 if apQuantity > 30:
