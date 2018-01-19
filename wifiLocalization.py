@@ -59,5 +59,5 @@ print(apFormatted)
 
 
 location = requests.get(headers)
-print(location)
+# print(location)
 print(location.text)
