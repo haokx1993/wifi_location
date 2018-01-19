@@ -71,3 +71,4 @@ with open('apinfo.txt', 'a') as f:
 	f.write(apFormatted.replace('|', '\n'))
 	f.write('\n')
 	f.write(location.text)
+	f.write('\n')
