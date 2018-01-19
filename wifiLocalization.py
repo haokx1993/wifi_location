@@ -11,6 +11,8 @@ import re
 import string
 import json
 import sys
+import urllib
+import urllib.request
 
 import str_bytes_conv
 import formatapinfo
@@ -31,6 +33,7 @@ print(wifiSerial.isOpen())
 # Scan APs and return information of APs, including RSSI and MAC, etc.
 writeFlag = wifiSerial.write('AT+CWLAP\r\n'.encode()) #AT+CWLAP: scan AP
 apInfo = wifiSerial.read(3000) #return bytes type
+wifiSerial.close()
 # print(apInfo)
 apInfo = str_bytes_conv.bytesToStr(apInfo) #bytes to str
 print(apInfo)
@@ -40,6 +43,8 @@ apList = re.findall(r'(["][0-9a-zA-Z].{27,100}")', apInfo, re.M)
 apQuantity = len(apList)
 # print(apQuantity)
 # print(apList)
+
+# Post 30 MACs most
 if apQuantity > 30:
  apList = apList[0:29]
 
@@ -51,6 +56,15 @@ apFormatted = formatapinfo.formatAp(extractAp, apQuantity)
 print(apFormatted)
 
 # Http request
-# headers = {amapUrl?'accesstype=1'&phoneImei&}
-
-wifiSerial.close()
+headers = amapUrl + '?' + 'accesstype=1' + '&' + phoneImei + '&' + 'macs=' + apFormatted\
+			 + '&' + 'output=json' + '&' + amapKey
+# headers = {
+	# 'accesstype': '1',
+	# 'imei': '352023073503050',
+	# 'macs': apFormatted,
+	# 'output': 'json',
+	# 'key': '0563c3cf06033e0dc6aa598c97e789e1'
+# }
+location = requests.get(headers)
+print(location)
+print(location.text)
