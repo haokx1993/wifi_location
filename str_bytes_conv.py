@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
 
+# filename str_bytes_conv.py
 # str to bytes & bytes to str function
 # by haokx
+# created date: 2018.1.16
 
 # function: str to bytes
 # parameter: str or bytes
