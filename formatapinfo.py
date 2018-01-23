@@ -18,12 +18,12 @@ def formatAp(ap_str, ap_quantity):
 	# print(extractRssi)
 
 	# Extract SSID
-	extractSsid = re.findall(r'([a-zA-Z_].*?[,])', ap_str, re.M)
+	extractSsid = re.findall(r'(["][0-9a-zA-Z_].*?[,])', ap_str, re.M)
 	# print(extractSsid)
 
-	# print('Quantity of MAC', len(extractMac))
-	# print('Quantity of RSSI',len(extractRssi))
-	# print('Quantity of SSID',len(extractSsid))
+	print('Quantity of MAC', len(extractMac))
+	print('Quantity of RSSI',len(extractRssi))
+	print('Quantity of SSID',len(extractSsid))
 	if len(extractMac)!= ap_quantity | len(extractRssi) != ap_quantity |\
 		len(extractSsid)!= ap_quantity:
 		print('Format error!')
