@@ -6,6 +6,7 @@
 # created date: 2018.1.19
 import re
 
+# Parameters: ap_str, AP string; ap_quantity, the quantity of AP
 def formatAp(ap_str, ap_quantity):
 
 	# Extract MAC
