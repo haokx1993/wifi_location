@@ -19,7 +19,7 @@ import str_bytes_conv
 import formatapinfo
 
 # ESP8266 COM25 baudrate: 115200 just in haokx's PC
-comNo = "COM26"
+comNo = "COM25"
 baudrateCom = 115200
 
 # Http request url
@@ -43,7 +43,8 @@ with open('aporigin.txt', 'ab') as f:
 	f.write(apInfoOrigin)
 	# f.write('\n')
 # print(apInfoOrigin)
-apInfo = str_bytes_conv.bytesToStr(apInfoOrigin) #bytes to str
+apInfo = bytes.decode(apInfoOrigin, 'GB2312') #bytes to str
+apInfo = str_bytes_conv.bytesToStr(apInfo)
 print(apInfo)
 
 # Extract RSSI, MAC & SSID, {27, 100}: ignore APs without SSID
@@ -64,7 +65,7 @@ extractAp = '\r\n'.join(apList)
 
 # Format AP as MAC,RSSI,SSID|MAC,RSSI,SSID...
 apFormatted = formatapinfo.formatAp(extractAp, apQuantity)
-print(apFormatted)
+# print(apFormatted)
 
 # Http request
 

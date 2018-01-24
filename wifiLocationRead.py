@@ -49,7 +49,7 @@ extractAp = '\r\n'.join(apList)
 
 # Format AP as MAC,RSSI,SSID|MAC,RSSI,SSID...
 apFormatted = formatapinfo.formatAp(extractAp, apQuantity)
-# print(apFormatted)
+print(apFormatted)
 
 # Http request
 

@@ -14,7 +14,7 @@ def formatAp(ap_str, ap_quantity):
 	# print(extractMac)
 
 	# Extract RSSI
-	extractRssi = re.findall(r'([-][0-9][0-9])', ap_str, re.M)
+	extractRssi = re.findall(r'([,][-][0-9][0-9])', ap_str, re.M)
 	# print(extractRssi)
 
 	# Extract SSID
@@ -41,6 +41,8 @@ def formatAp(ap_str, ap_quantity):
 		# print(apSorted)
 		apSorted = apSorted.replace('",', '|')
 		apSorted = apSorted.replace('|,', '|')
+		apSorted = apSorted.replace(',,', ',')
+		apSorted = apSorted.replace('"', '')
 		apSorted = apSorted[:-1]
 		# print(apSorted)
 		
