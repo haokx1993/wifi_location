@@ -25,9 +25,9 @@ import formatapinfo
 timeStamp = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
 print(timeStamp)
 
-with open('aporiginpart.txt', 'rb') as f:
+with open('aporiginfortest.txt', 'rb') as f:
 	apInfoOrigin = f.read()
-# print(apInfoOrigin)
+print(apInfoOrigin)
 apInfo = str_bytes_conv.bytesToStr(apInfoOrigin) #bytes to str
 print(apInfo)
 
@@ -52,12 +52,14 @@ apFormatted = formatapinfo.formatAp(extractAp, apQuantity)
 print(apFormatted)
 
 # Http request
+# headers = amapUrl + '?' + 'accesstype=1' + '&' + phoneImei + '&' + 'macs=' + apFormatted\
+			 # + '&' + 'output=json' + '&' + amapKey
 
 location = requests.get(amapUrl, headers)
 print(location.text)
 
 with open('apinfo.txt', 'a') as f:
-	# f.write(timeStamp)
+	f.write(timeStamp)
 	f.write('\n')
 	f.write(apFormatted.replace('|', '\n'))
 	f.write('\n')
