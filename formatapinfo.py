@@ -21,9 +21,9 @@ def formatAp(ap_str, ap_quantity):
 	extractSsid = re.findall(r'(["][0-9a-zA-Z_].*?[,])', ap_str, re.M)
 	# print(extractSsid)
 
-	print('Quantity of MAC', len(extractMac))
-	print('Quantity of RSSI',len(extractRssi))
-	print('Quantity of SSID',len(extractSsid))
+	# print('Quantity of MAC', len(extractMac))
+	# print('Quantity of RSSI',len(extractRssi))
+	# print('Quantity of SSID',len(extractSsid))
 	if len(extractMac)!= ap_quantity | len(extractRssi) != ap_quantity |\
 		len(extractSsid)!= ap_quantity:
 		print('Format error!')
@@ -37,13 +37,14 @@ def formatAp(ap_str, ap_quantity):
 			apSorted.append(extractSsid[i])
 		# print(apSorted)
 
+		# List to str, apSorted: str type
 		apSorted = ','.join(apSorted)
 		# print(apSorted)
 		apSorted = apSorted.replace('",', '|')
 		apSorted = apSorted.replace('|,', '|')
 		apSorted = apSorted.replace(',,', ',')
 		apSorted = apSorted.replace('"', '')
-		apSorted = apSorted[:-1]
+		apSorted = apSorted[:-1]  #Delete the last character
 		# print(apSorted)
 		
 		return apSorted
