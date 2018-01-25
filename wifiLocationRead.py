@@ -51,10 +51,6 @@ extractAp = '\r\n'.join(apList)
 apFormatted = formatapinfo.formatAp(extractAp, apQuantity)
 print(apFormatted)
 
-# Http request
-# headers = amapUrl + '?' + 'accesstype=1' + '&' + phoneImei + '&' + 'macs=' + apFormatted\
-			 # + '&' + 'output=json' + '&' + amapKey
-
 headers = {
 	'accesstype': '1',
 	'imei': phoneImei,
