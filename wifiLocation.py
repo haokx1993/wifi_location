@@ -77,6 +77,13 @@ extractAp = '\r\n'.join(apList)
 apFormatted = formatapinfo.formatAp(extractAp, apQuantity)
 print(apFormatted)
 
+headers = {
+	'accesstype': '1',
+	'imei': phoneImei,
+	'macs': apFormatted,
+	'output': 'json',
+	'key': amapKey
+}
 location = requests.get(amapUrl, headers)
 print(location.text)
 

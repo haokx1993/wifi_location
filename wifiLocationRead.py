@@ -55,6 +55,13 @@ print(apFormatted)
 # headers = amapUrl + '?' + 'accesstype=1' + '&' + phoneImei + '&' + 'macs=' + apFormatted\
 			 # + '&' + 'output=json' + '&' + amapKey
 
+headers = {
+	'accesstype': '1',
+	'imei': phoneImei,
+	'macs': apFormatted,
+	'output': 'json',
+	'key': amapKey
+}
 location = requests.get(amapUrl, headers)
 print(location.text)
 
