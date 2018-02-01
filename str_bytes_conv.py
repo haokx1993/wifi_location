@@ -17,6 +17,6 @@ def strToBytes(vStr):
 # parameter: str or bytes		
 def bytesToStr(vBytes):
 	if isinstance(vBytes, bytes):
-		return bytes.decode(vBytes)
+		return bytes.decode(vBytes, errors = 'ignore') # Ignore the codes that can't decode
 	else:
 		return vBytes
